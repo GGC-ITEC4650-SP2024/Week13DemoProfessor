@@ -272,6 +272,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 2683453333264985834, guid: a53ef89d615874948b38ef37394f37a9, type: 3}
+  ballPrefab: {fileID: 8074892368713643775, guid: 7bea723ce886248a3959a755dc0862b7, type: 3}
 --- !u!4 &127975202
 Transform:
   m_ObjectHideFlags: 0
