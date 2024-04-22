@@ -35,7 +35,7 @@ public class NetMan : MonoBehaviourPunCallbacks
     }
 
 
-    // Runs once for player on each laptop
+    // Runs on server when a remote player enters the room
     public override void OnPlayerEnteredRoom(Player newPlayer) {
         //server owns the ball
         if(PhotonNetwork.IsMasterClient) {
