@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 
 public class BallController : MonoBehaviour
@@ -15,4 +16,18 @@ public class BallController : MonoBehaviour
     {
         
     }
+
+    private void OnCollisionEnter(Collision collision) {
+        if(PhotonNetwork.IsMasterClient) {
+            GameObject g = collision.gameObject;
+            if(g.tag == "Player") {
+                //PlayerController pc = g.GetComponent<PlayerController>();
+                //pc.score += 10;
+                PhotonView pv = g.GetComponent<PhotonView>();
+                pv.RPC("increaseScore", RpcTarget.AllBuffered, 10);
+            }
+        }
+    }
+
+
 }

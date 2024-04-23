@@ -9,22 +9,28 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
     Rigidbody myBod;
     float moveForce = 500;
     Text namePlate;
+    Text scorePlate;
     public int health;
     Transform greenHealth;
+    public int score;
 
     // Start is called before the first frame update
     void Start()
     {
         myBod = GetComponent<Rigidbody>();
-        namePlate = GetComponentInChildren<Text>();
+        namePlate = transform.Find("Canvas/NamePlate").GetComponent<Text>();
         namePlate.text = photonView.Owner.NickName;
         greenHealth = transform.Find("Canvas/GreenHealth");
+        scorePlate = transform.Find("Canvas/ScorePlate").GetComponent<Text>();
     }
 
     // Update is called once per frame
     void Update()
     {
         //this code runs on every cube
+        scorePlate.text = "" + score;
+
+
         if(health > 0) {
             greenHealth.localScale = new Vector3(health/100f, 1, 1);
         }
@@ -62,5 +68,10 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
         else {
             health = (int) stream.ReceiveNext();
         }
+    }
+
+    [PunRPC]
+    public void increaseScore(int n) {
+        score += n;
     }
 }
